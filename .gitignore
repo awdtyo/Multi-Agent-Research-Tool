@@ -1,0 +1,33 @@
+# Secrets (GROQ_API_KEY, TAVILY_API_KEY)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs and local outputs
+*.log
+output/
+reports/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
