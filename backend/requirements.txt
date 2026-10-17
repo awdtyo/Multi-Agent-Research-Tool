@@ -1,0 +1,32 @@
+# Core LangChain / LCEL
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+
+# Agents (create_agent / langgraph)
+langgraph>=0.2.0
+
+# LLM provider (Groq)
+langchain-groq>=0.2.0
+groq>=0.11.0
+
+# Search tool (Tavily)
+langchain-tavily>=0.1.0
+tavily-python>=0.5.0
+
+# Scraping tool (BeautifulSoup)
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+requests>=2.32.0
+
+# Config / utilities
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+
+# FastAPI backend
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+sse-starlette>=1.7.2
+
+# Rich (used by tools.py)
+rich
