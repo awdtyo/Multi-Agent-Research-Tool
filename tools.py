@@ -19,9 +19,6 @@ def web_search(query: str) -> str:
             )
     return "\n----\n".join(out)
 
-print(web_search.invoke("What are the recent events that happened between the Indian government and Elon musk regarding Starlink?"))
-
-
 @tool
 def scrape_url(url: str) -> str:
     """Scrape and return clean text content from a given URL for deeper reading"""
