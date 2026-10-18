@@ -16,7 +16,7 @@ _gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
 if _gemini_key and "your_gemini_api_key_here" not in _gemini_key.lower():
     llm = ChatGoogleGenerativeAI(
         api_key=_gemini_key,
-        model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+        model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
         temperature=0,
     )
 else:

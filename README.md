@@ -1,5 +1,5 @@
 # Multi-Agent Research System
-
+<img src="assets/banner.png" alt="Multi-Agent Research System" width="1000" />
 A full-stack, multi-agent research pipeline with a FastAPI backend (SSE streaming) and a React + Vite frontend. Search the web, scrape sources, draft a report, and critique it — all through a clean Perplexity-style UI.
 
 ```
