@@ -88,6 +88,19 @@ def _parse_search_sources(text: str) -> list[dict[str, str | None]]:
     return sources
 
 
+def _number_search_blocks(text: str) -> str:
+    """
+    Number the Tavily-formatted search blocks so the writer can cite them
+    inline as [1], [2], ... matching the sources emitted to the frontend.
+    """
+    blocks = [b.strip() for b in text.split("\n----\n") if b.strip()]
+    if len(blocks) <= 1:
+        return text
+    return "\n\n----\n\n".join(
+        f"[{i}] {block}" for i, block in enumerate(blocks, start=1)
+    )
+
+
 # ---------------------------------------------------------------------------
 # LangChain callback handler -> emits SSE events
 # ---------------------------------------------------------------------------
@@ -236,7 +249,7 @@ async def research_event_stream(query: str) -> AsyncGenerator[dict[str, Any], No
 
             # ---- Step 3: Writer chain (streaming tokens) ------------------
             research_combined = (
-                f"SEARCH RESULTS : \n{search_text}"
+                f"SEARCH RESULTS :\n{_number_search_blocks(search_text)}"
                 f"\nDETAILED SCRAPED CONTENT: \n{scraped_content}"
             )
             report_parts: list[str] = []
@@ -283,7 +296,9 @@ async def research_event_stream(query: str) -> AsyncGenerator[dict[str, Any], No
             return
 
         parsed = json.loads(item)
-        yield parsed
+        # Encode the payload as JSON here; sse-starlette passes strings
+        # through verbatim, while dicts would be rendered as Python reprs.
+        yield {"event": parsed["event"], "data": json.dumps(parsed["data"])}
 
 
 # ---------------------------------------------------------------------------

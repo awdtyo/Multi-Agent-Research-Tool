@@ -22,3 +22,4 @@ requests>=2.32.0
 # Config / utilities
 python-dotenv>=1.0.0
 pydantic>=2.7.0
+langchain-google-genai>=2,<3

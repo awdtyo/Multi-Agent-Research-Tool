@@ -1,5 +1,6 @@
 from langchain.agents import create_agent
 from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -8,7 +9,18 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-llm = ChatGroq(model = "openai/gpt-oss-120b", temperature = 0)
+# Single shared LLM for every agent chain; provider is selected by env:
+# set GEMINI_API_KEY (bigger free daily token budget) or leave it empty/post
+# the placeholder to use Groq.
+_gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
+if _gemini_key and "your_gemini_api_key_here" not in _gemini_key.lower():
+    llm = ChatGoogleGenerativeAI(
+        api_key=_gemini_key,
+        model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+        temperature=0,
+    )
+else:
+    llm = ChatGroq(model="openai/gpt-oss-120b", temperature=0)
 
 #1st agent
 def build_search_agent():
@@ -24,7 +36,7 @@ def build_reader_agent():
     )
 #writer chain
 writer_prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are an expert research writer. Write clear, structured and insightful reports."),
+    ("system", "You are an expert research writer. Write clear, structured and insightful reports. Cite every factual claim with an inline [n] citation tag, where n is the number of the source block it came from (e.g. [1], [2]); the reader renders these as links."),
     ("human", """Write a detailed research report on the topic below.
 
 Topic: {topic}

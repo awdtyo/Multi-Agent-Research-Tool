@@ -1,0 +1,85 @@
+/*
+ * Delve design tokens.
+ * Every color, radius, shadow, font and duration used by the app is defined
+ * here and only here. Components consume them through Tailwind utilities
+ * generated from the @theme block in styles/index.css.
+ */
+
+:root {
+  color-scheme: dark;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* ---- palette: dark (default) ---- */
+  --bg: #0b1514;
+  --surface: #111c1b;
+  --surface-2: #162423;
+  --surface-3: #1c2b29;
+  --overlay: rgba(4, 10, 9, 0.72);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #e8eeee;
+  --text-2: #8fa3a2;
+  --text-3: #5f716e;
+  --accent: #20b8cd;
+  --accent-hover: #3fc9db;
+  --accent-soft: rgba(32, 184, 205, 0.12);
+  --accent-text: #6fdce9;
+  --on-accent: #062024;
+  --danger: #d2807c;
+  --danger-soft: rgba(210, 128, 124, 0.12);
+  --success: #63bd9d;
+
+  /* dark mode relies on borders, not shadows */
+  --shadow-1: none;
+  --shadow-2: none;
+  --ring: rgba(32, 184, 205, 0.55);
+
+  /* ---- type ---- */
+  --font-ui: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, monospace;
+
+  /* ---- motion ---- */
+  --dur-fast: 130ms;
+  --dur: 180ms;
+  --dur-slow: 240ms;
+  --ease: cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fbfaf4;
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #f3f1e9;
+  --overlay: rgba(20, 26, 25, 0.32);
+  --border: rgba(20, 30, 28, 0.09);
+  --border-strong: rgba(20, 30, 28, 0.16);
+  --text: #10201e;
+  --text-2: #5d6c68;
+  --text-3: #8a968f;
+  --accent: #1495a8;
+  --accent-hover: #0f8394;
+  --accent-soft: rgba(20, 149, 168, 0.1);
+  --accent-text: #0d7385;
+  --on-accent: #ffffff;
+  --danger: #b04842;
+  --danger-soft: rgba(176, 72, 66, 0.09);
+  --success: #33795e;
+
+  /* layered soft shadows, light mode only */
+  --shadow-1: 0 1px 2px rgba(25, 40, 38, 0.06), 0 1px 6px rgba(25, 40, 38, 0.05);
+  --shadow-2: 0 2px 4px rgba(25, 40, 38, 0.06), 0 8px 24px rgba(25, 40, 38, 0.1);
+  --ring: rgba(20, 149, 168, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+  }
+}
